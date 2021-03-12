@@ -11,7 +11,7 @@
                 text-transform:uppercase;
                 width:100%;
                 overflow: hidden;
-                color: white;
+                color: blue;
 
             }
             #container{
@@ -23,7 +23,7 @@
 
             }
             #canvas {
-                background: #EEEEEE;
+                background: #999999;
                 height: 100%;
             }
             #drawer{
@@ -63,9 +63,9 @@
             <div id="logbox"></div>
         </div>
 
-<script src="/jquery-1.7.2.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-        
+
 var list = [
     {id: 0, name: "Air", Reactions: [], img: ""},
     {id: 1, name: "Earth", Reactions: []},
@@ -221,7 +221,7 @@ function mousedown(ev){
        makeElement(item);
         element.style.position = "absolute";
         object = element;
-        $canvas.appendChild(element); 
+        $canvas.appendChild(element);
         setpos();
     };
 
@@ -257,7 +257,7 @@ function makeElement(item){
     element.className = "element";
     element.dataset.id = item.id;
     element.innerHTML = "<img src='" +item.img +"' width='" + imgsize + "px'><div class='elementName' data-id='" + item.id + "' draggable='false'>" + item.name + "</div>";
-} 
+}
 
 function showinDrawer(item){ //array[i]
     var c = 1;
@@ -265,12 +265,12 @@ function showinDrawer(item){ //array[i]
 
     if (l == 0){
         makeElement(item);
-        $drawer.appendChild(element); 
-    } 
+        $drawer.appendChild(element);
+    }
     else {
         while (i<l){
             //document.getElementById("canvas").innerHTML +=  'checking element #' + i;
-            c = item.name.localeCompare($('#drawer .element')[i].childNodes[1].innerHTML); 
+            c = item.name.localeCompare($('#drawer .element')[i].childNodes[1].innerHTML);
 
             if (c == 0){break;}
             else if (c == -1){
@@ -283,7 +283,7 @@ function showinDrawer(item){ //array[i]
 
         if (c == 1){
             makeElement(item);
-            $drawer.appendChild(element); 
+            $drawer.appendChild(element);
         }
         i = 0;
     }
@@ -306,7 +306,7 @@ document.addEventListener('mousedown',function(ev){
 
 </script>
 
-    
+
 
 
 </body></html>
