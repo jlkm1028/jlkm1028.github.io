@@ -166,8 +166,8 @@ function mousedown(ev){
         ev.preventDefault();
         setpos();
         $log.innerHTML += ".";// event.type;
-        //var mx = event.clientX  || event.targetTouches[0].clientX;
-        //var my = event.clientY  || event.targetTouches[0].clientY;
+        var mx = event.clientX  || event.targetTouches[0].clientX;
+        var my = event.clientY  || event.targetTouches[0].clientY;
 
         for (var i in coordinates) {
             if ((mx >= coordinates[i].left && mx <= coordinates[i].right) && (my >= coordinates[i].top && my <= coordinates[i].bottom)){
