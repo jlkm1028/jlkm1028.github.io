@@ -99,13 +99,11 @@ var object;
 var dragged,droptarget;
 var coordinates = [];
 var imgsize  = 60;
-
+/*
 function dragElement(){
     $log.innerHTML += "*";
-
     ev.preventDefault();
     //setpos();
-
             var mx = event.clientX  || event.targetTouches[0].clientX;
             var my = event.clientY  || event.targetTouches[0].clientY;
 
@@ -117,18 +115,15 @@ function dragElement(){
         }
     }
 };
-
+*/
 function mousedown(ev){
     var ev = event || window.event;
     object = event.target.parentElement;
     ev.preventDefault();
-
-    //$log.innerHTML +=  event.type + ".";
-
+    $log.innerHTML += "$";
 
     function setpos(){
       $log.innerHTML += "^";// + event.type;
-
         switch(event.type){
             case "mousemove":
                 x = event.clientX - 30;
@@ -171,8 +166,8 @@ function mousedown(ev){
         ev.preventDefault();
         setpos();
         $log.innerHTML += ".";// event.type;
-        var mx = event.clientX  || event.targetTouches[0].clientX;
-        var my = event.clientY  || event.targetTouches[0].clientY;
+        //var mx = event.clientX  || event.targetTouches[0].clientX;
+        //var my = event.clientY  || event.targetTouches[0].clientY;
 
         for (var i in coordinates) {
             if ((mx >= coordinates[i].left && mx <= coordinates[i].right) && (my >= coordinates[i].top && my <= coordinates[i].bottom)){
@@ -192,7 +187,6 @@ function mousedown(ev){
 
         if (mx >= (window.innerWidth - 280) || mx <= 0 || my <= 0 || my >= window.innerHeight){
             object.remove();
-            return;
         }
 
         for (var i in coordinates) {
@@ -311,17 +305,18 @@ baseElements.forEach(showinDrawer);
 document.addEventListener('touchstart',function(ev){
     if(ev.target && ev.target.nodeName == "IMG") {
       $log.innerHTML +=  "V";
-      e.preventDefault(); mousedown(ev);
+      //e.preventDefault();
+      mousedown(ev);
     }
 });
 document.addEventListener('mousedown',function(ev){
     if(ev.target && ev.target.nodeName == "IMG") {
-      $log.innerHTML +=  "$";
+      $log.innerHTML +=  "M";
       mousedown(ev);
     }
 });
 
-$log.innerHTML +=  "initializing...<BR>$=mousedown<BR>V=touchstart<BR>*=Drag<BR>!=drop<BR>()=duplicate<BR>?=reset_var<BR>#=end_of_mousedown<BR>^=setpos<BR>.=drag<BR>";
+$log.innerHTML +=  "initializing...<BR>M=mousedown_e<BR>$=mousedown_function<BR>V=touchstart_e<BR>!=drop<BR>()=duplicate<BR>?=reset_var<BR>#=end_of_mousedown<BR>^=setpos<BR>.=drag<BR>";
 
 
 
