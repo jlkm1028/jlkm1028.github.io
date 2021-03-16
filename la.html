@@ -5,14 +5,13 @@
                 -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
                 -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
                 font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
-                font-size:15px;
+                font-size:10px;
                 height:100vh;
                 margin:0px;
                 text-transform:uppercase;
                 width:100%;
-                overflow: hidden;
                 color: blue;
-
+                overflow: hidden;
             }
             #container{
                 overflow: hidden;
@@ -31,7 +30,7 @@
                 background:  #055500;
                 height: 100%;
                 padding: 15px;
-		overflow: hidden;
+		            overflow: scroll;
 
 
             }
@@ -47,7 +46,7 @@
 
             #logbox{
                 position: fixed;
-                width:80px;
+                width:200px;
                 height: 1000px;
                 overflow: visible;
             }
@@ -68,7 +67,7 @@
         </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/ui/1.8.17/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
 
@@ -100,7 +99,7 @@ var x,y;
 var object;
 var dragged,droptarget;
 var coordinates = [];
-var imgsize  = 60;
+var imgsize  = 80;
 /*
 function dragElement(){
     $log.innerHTML += "*";
@@ -122,26 +121,38 @@ function mousedown(ev){
     var ev = event || window.event;
     object = event.target.parentElement;
     ev.preventDefault();
-    $log.innerHTML += "$";
+    //$log.innerHTML += " mousedown_f";
 
     function setpos(){
-      $log.innerHTML += "^";// + event.type;
+      $log.innerHTML += event.type + " ";
         switch(event.type){
             case "mousemove":
-                x = event.clientX - 30;
-                y = event.clientY - 30;
+                x = event.clientX - 40;
+                y = event.clientY - 40;
+                $log.innerHTML += " pos_mm_"
                 break;
+            /*
             case "touchend":
                 x = event.changedTouches[0].clientX - 20;
                 y = event.changedTouches[0].clientY - 20;
+                $log.innerHTML += " pos_te"
                 break;
+            */
             case "touchmove":
-                x = event.targetTouches[0].clientX - 20;
-                y = event.targetTouches[0].clientY - 20;
+                x = event.targetTouches[0].clientX - 40;
+                y = event.targetTouches[0].clientY - 40;
+                $log.innerHTML += " pos_tm"
+
                 break;
-            case "mousedown" || "touchstart":
-                x = event.clientX - 30 || event.changedTouches[0].clientX - 20;
-                y = event.clientY - 30 || event.changedTouches[0].clientY - 20;
+            case "mousedown":   //for new element
+                x = event.clientX - 40;
+                y = event.clientY - 40;
+                $log.innerHTML += " pos_md";
+                break;
+            case "touchstart": //for new element
+                x = event.changedTouches[0].clientX - 40;
+                y = event.changedTouches[0].clientY - 40;
+                $log.innerHTML += " pos_ts"
                 break;
         }
 
@@ -166,8 +177,8 @@ function mousedown(ev){
 
     function dragElement(){
         ev.preventDefault();
+        //$log.innerHTML += " drag";// event.type;
         setpos();
-        $log.innerHTML += ".";// event.type;
         var mx = event.clientX  || event.targetTouches[0].clientX;
         var my = event.clientY  || event.targetTouches[0].clientY;
 
@@ -182,7 +193,7 @@ function mousedown(ev){
 
     function dropElement(){
         ev.preventDefault();
-        $log.innerHTML += "!";
+        //$log.innerHTML += " drop";
 
         var mx = event.clientX  || event.changedTouches[0].clientX;
         var my = event.clientY  || event.changedTouches[0].clientY;
@@ -217,7 +228,7 @@ function mousedown(ev){
 	      object.style.zIndex = 5;
         object = null;
         coordinates = [];
-        $log.innerHTML += '?<BR>'; //+ event.type;
+        $log.innerHTML += ' reset<BR>'; //+ event.type;
 
         document.removeEventListener("mouseup", dropElement);
         document.removeEventListener("mousemove", dragElement);
@@ -257,7 +268,7 @@ function mousedown(ev){
     document.addEventListener('touchend',dropElement, false);
 
 
-    $log.innerHTML += "#"; // + event.type;
+    //$log.innerHTML += " EndMouseDown"; // + event.type;
 
 }
 
@@ -304,21 +315,23 @@ function showinDrawer(item){ //array[i]
 var baseElements = list.filter(x => x.Reactions == 0).sort(); //arrary
 baseElements.forEach(showinDrawer);
 
+document.addEventListener('contextmenu', event => event.preventDefault())
+
 document.addEventListener('touchstart',function(ev){
     if(ev.target && ev.target.nodeName == "IMG") {
-      $log.innerHTML +=  "V";
+      //$log.innerHTML +=  " touchstart";
       //e.preventDefault();
       mousedown(ev);
     }
 });
 document.addEventListener('mousedown',function(ev){
     if(ev.target && ev.target.nodeName == "IMG") {
-      $log.innerHTML +=  "M";
+      //$log.innerHTML +=  " mousedown";
       mousedown(ev);
     }
 });
 
-$log.innerHTML +=  "initializing...<BR>M=mousedown_e<BR>$=mousedown_function<BR>V=touchstart_e<BR>!=drop<BR>()=duplicate<BR>?=reset_var<BR>#=end_of_mousedown<BR>^=setpos<BR>.=drag<BR>";
+$log.innerHTML +=  "initializing...<BR>";
 
 
 
