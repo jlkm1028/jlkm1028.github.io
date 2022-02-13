@@ -14,24 +14,28 @@
                 overflow: hidden;
             }
             #container{
-                overflow: hidden;
-                display: grid;
-                grid-template-columns: auto 260px;
                 height: 100%;
+                width: 100%;
                 touch-action: none;
-
+                position:absolute;
             }
             #canvas {
                 background: #999999;
                 height: 100%;
-
+                overflow: hidden;
             }
             #drawer{
                 background:  #055500;
+                width: 240px;
                 height: 100%;
                 padding: 15px;
 		            overflow: scroll;
-
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                z-index: 999;
+                overflow: scroll;
 
             }
             .element {
@@ -59,9 +63,7 @@
         <div id="container">
 
             <div id="canvas">
-            </div>
-
-            <div id="drawer" class="hhaa">
+                <div id="drawer" class="hhaa"></div>
             </div>
             <div id="logbox"></div>
         </div>
@@ -99,7 +101,7 @@ var x,y;
 var object;
 var dragged,droptarget;
 var coordinates = [];
-var imgsize  = 80;
+var imgsize  = 180;
 /*
 function dragElement(){
     $log.innerHTML += "*";
@@ -315,7 +317,7 @@ function showinDrawer(item){ //array[i]
 var baseElements = list.filter(x => x.Reactions == 0).sort(); //arrary
 baseElements.forEach(showinDrawer);
 
-document.addEventListener('contextmenu', event => event.preventDefault())
+//document.addEventListener('contextmenu', event => event.preventDefault())
 
 document.addEventListener('touchstart',function(ev){
     if(ev.target && ev.target.nodeName == "IMG") {
